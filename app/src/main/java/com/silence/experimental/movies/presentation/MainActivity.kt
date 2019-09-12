@@ -1,7 +1,8 @@
-package com.silence.experimental
+package com.silence.experimental.movies.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.silence.experimental.R
 
 class MainActivity : AppCompatActivity() {
 
