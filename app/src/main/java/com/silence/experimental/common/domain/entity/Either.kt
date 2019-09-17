@@ -1,4 +1,4 @@
-package com.silence.experimental.common.entity
+package com.silence.experimental.common.domain.entity
 
 sealed class Either<out L, out R> {
     /** * Represents the left side of [Either] class which by convention is a "Failure". */
