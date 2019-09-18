@@ -10,8 +10,8 @@ import com.silence.experimental.movies.data.entity.MovieDBModel
 interface MoviesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovies(movies: List<MovieDBModel>)
+    suspend fun insertMovies(movies: List<MovieDBModel>)
 
     @Query("SELECT * FROM MovieDBModel")
-    fun getAllMovies(): List<MovieDBModel>
+    suspend fun getAllMovies(): List<MovieDBModel>
 }

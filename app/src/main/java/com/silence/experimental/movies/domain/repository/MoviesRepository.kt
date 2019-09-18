@@ -2,9 +2,8 @@ package com.silence.experimental.movies.domain.repository
 
 import com.silence.experimental.common.domain.entity.Either
 import com.silence.experimental.common.domain.entity.Failure
-import com.silence.experimental.movies.domain.entity.MovieDomainModel
-import kotlinx.coroutines.channels.ReceiveChannel
+import com.silence.experimental.movies.data.entity.MovieRemoteModel
 
 interface MoviesRepository {
-    fun popularMovies(): ReceiveChannel<Either<Failure, List<MovieDomainModel>>>
+    suspend fun popularMovies(): Either<Failure, List<MovieRemoteModel>>
 }
