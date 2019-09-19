@@ -10,8 +10,9 @@ import com.silence.experimental.movies.domain.entity.toPresentationModel
 import com.silence.experimental.movies.domain.usecase.GetMovies
 import com.silence.experimental.movies.domain.usecase.GetMovies.*
 import com.silence.experimental.movies.presentation.entity.MoviePresentationModel
+import javax.inject.Inject
 
-class MoviesViewModel(
+class MoviesViewModel @Inject constructor(
     private val getMovies: GetMovies,
     private val errorHandler: ErrorHandler
 ) : BaseViewModel() {

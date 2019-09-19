@@ -3,6 +3,12 @@ package com.silence.experimental.common.extension
 import android.content.res.Resources
 import com.silence.experimental.R
 import com.silence.experimental.common.domain.entity.Failure
+import com.silence.experimental.common.domain.entity.Failure.*
+import com.silence.experimental.movies.data.cache.MoviesCache
+import com.silence.experimental.movies.data.cache.MoviesCache.*
+import com.silence.experimental.movies.domain.usecase.GetMovies
+import com.silence.experimental.movies.domain.usecase.GetMovies.*
+import com.silence.experimental.movies.presentation.entity.MoviePresentationModel
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 
@@ -19,7 +25,9 @@ fun Failure.errorMessage(resources: Resources) = when (this) {
         500 -> resources.getString(R.string.server_error_error)
         else -> resources.getString(R.string.unknown_error)
     }
-    is Failure.NetworkConnection -> resources.getString(R.string.network_error)
-    is SocketTimeoutException -> resources.getString(R.string.timeout_error)
+    is NetworkConnection -> resources.getString(R.string.network_error)
+    is ServerError -> resources.getString(R.string.server_error_error)
+    is MoviesCacheFailure -> resources.getString(R.string.cache_error)
+    is MoviesFailure -> resources.getString(R.string.use_case_error)
     else -> resources.getString(R.string.unknown_error)
 }

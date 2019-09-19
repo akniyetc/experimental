@@ -1,6 +1,7 @@
 package com.silence.experimental.common.di
 
 import android.content.Context
+import android.content.res.Resources
 import android.net.ConnectivityManager
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -31,4 +32,8 @@ class AppModule(private val app: ExperimentalApplication) {
     @Singleton
     @Provides
     fun provideNetworkHandler(cm: ConnectivityManager) = NetworkHandler(cm)
+
+    @Singleton
+    @Provides
+    fun provideResources(context: Context): Resources = context.resources
 }

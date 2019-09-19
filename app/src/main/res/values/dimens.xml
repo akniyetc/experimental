@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="movie_item_margin">4dp</dimen>
+    <dimen name="movie_item_title_size">16sp</dimen>
+    <dimen name="card_view_corner_radius">4dp</dimen>
+    <dimen name="card_view_padding">4dp</dimen>
+    <dimen name="text_view_overview_margin">4dp</dimen>
+</resources>

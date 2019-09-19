@@ -10,8 +10,10 @@ import com.silence.experimental.movies.data.entity.toDomainModel
 import com.silence.experimental.movies.domain.entity.MovieDomainModel
 import com.silence.experimental.movies.domain.repository.MoviesRepository
 import com.silence.experimental.movies.domain.usecase.GetMovies.*
+import javax.inject.Inject
 
-class GetMovies(private val moviesRepository: MoviesRepository) : BaseUseCase<List<MovieDomainModel>, Params>() {
+class GetMovies @Inject constructor(private val moviesRepository: MoviesRepository) :
+    BaseUseCase<List<MovieDomainModel>, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, List<MovieDomainModel>> {
         return try {
@@ -26,5 +28,5 @@ class GetMovies(private val moviesRepository: MoviesRepository) : BaseUseCase<Li
     }
 
     class Params
-    data class MoviesFailure(val t: Throwable): FeatureFailure()
+    data class MoviesFailure(val t: Throwable) : FeatureFailure()
 }

@@ -11,8 +11,9 @@ import com.silence.experimental.common.domain.entity.Failure.ServerError
 import com.silence.experimental.movies.data.cache.MoviesCache
 import com.silence.experimental.movies.data.entity.MovieRemoteModel
 import com.silence.experimental.movies.data.entity.toDBModel
+import javax.inject.Inject
 
-class MoviesRemote(
+class MoviesRemote @Inject constructor (
     private val mainService: MainService,
     private val networkHandler: NetworkHandler,
     private val cache: MoviesCache

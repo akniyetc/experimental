@@ -19,4 +19,6 @@
     <string name="refresh">Refresh</string>
     <string name="empty_data">Empty data</string>
     <string name="empty_data_description">You have not data yet.\nPlease try again later.</string>
+    <string name="cache_error">Can not save data!</string>
+    <string name="use_case_error">UseCase scheduler failed!</string>
 </resources>

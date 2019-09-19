@@ -8,14 +8,18 @@ import com.silence.experimental.movies.data.entity.MovieRemoteModel
 import com.silence.experimental.movies.data.entity.toRepositoryModel
 import com.silence.experimental.movies.data.remote.MoviesRemote
 import com.silence.experimental.movies.domain.repository.MoviesRepository
+import javax.inject.Inject
 
-class MoviesRepositoryImpl(private val remote: MoviesRemote,
-                           private val cache: MoviesCache): MoviesRepository {
+class MoviesRepositoryImpl @Inject constructor(
+    private val remote: MoviesRemote,
+    private val cache: MoviesCache
+) : MoviesRepository {
 
     override suspend fun popularMovies(): Either<Failure, List<MovieRemoteModel>> {
         return if (cache.isCached()) {
             cache.getCachedMovies().map { moviesDBModels ->
-                moviesDBModels.map { it.toRepositoryModel() } }
+                moviesDBModels.map { it.toRepositoryModel() }
+            }
         } else {
             remote.loadPopularMovies()
         }

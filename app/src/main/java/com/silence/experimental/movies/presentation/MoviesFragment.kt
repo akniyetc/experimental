@@ -4,33 +4,54 @@ import android.os.Bundle
 import com.silence.experimental.R
 import com.silence.experimental.common.extension.observe
 import com.silence.experimental.common.extension.viewModel
+import com.silence.experimental.common.extension.visible
 import com.silence.experimental.common.presentation.BaseFragment
 import com.silence.experimental.common.presentation.ViewState
 import com.silence.experimental.movies.di.MoviesComponent
 import com.silence.experimental.movies.di.MoviesModule
 import com.silence.experimental.movies.presentation.entity.MoviePresentationModel
+import kotlinx.android.synthetic.main.fragment_movies.*
+import javax.inject.Inject
 
-class MoviesFragment: BaseFragment() {
+class MoviesFragment : BaseFragment() {
     override val layoutId = R.layout.fragment_movies
 
     private var moviesComponent: MoviesComponent? = null
     private lateinit var moviesViewModel: MoviesViewModel
 
+    @Inject
+    lateinit var moviesAdapter: MoviesAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        moviesComponent = appComponent.plusMoviesComponent(MoviesModule())
-            .also { it.inject(this) }
+        injectMembers()
+        initViews()
 
         moviesViewModel = viewModel(viewModelFactory) {
             observe(viewState, ::handleViewState)
         }
+    }
 
+    private fun initViews() {
+        rvMovies.adapter = moviesAdapter
+    }
+
+    private fun injectMembers() {
+        moviesComponent = appComponent.plusMoviesComponent(MoviesModule())
+            .also { it.inject(this) }
     }
 
     private fun handleViewState(viewState: ViewState<List<MoviePresentationModel>>?) {
-        viewState?.let {
-
+        viewState?.let { state ->
+            if (state.data != null) {
+                rvMovies.visible(true)
+                moviesAdapter.collection = state.data!!
+            } else {
+                rvMovies.visible(false)
+            }
+            swipeRefreshMovies.isRefreshing = state.isLoading
+            state.errorMessage?.let { showMessage(it, contentMovies) }
         }
     }
 
@@ -38,5 +59,9 @@ class MoviesFragment: BaseFragment() {
         super.onDestroyView()
 
         moviesComponent = null
+    }
+
+    companion object {
+        fun newInstance() = MoviesFragment()
     }
 }
