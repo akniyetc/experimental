@@ -35,18 +35,19 @@ class MoviesViewModel @Inject constructor(
     }
 
     private fun handlePopularMovies(movies: List<MovieDomainModel>) {
-        viewState.value?.let {
-            it.data = movies.map { movieDomainModel -> movieDomainModel.toPresentationModel() }
-            it.isLoading = false
+        viewState.value = viewStateData.apply {
+            data = movies.map { it.toPresentationModel() }
+            isLoading = false
+            errorMessage = null
         }
     }
 
     private fun handleFailure(exception: Failure) {
         errorHandler.proceed(exception) { message ->
-            viewState.value?.let {
-                it.data = null
-                it.isLoading = false
-                it.errorMessage = message
+            viewState.value = viewStateData.apply {
+                data = null
+                isLoading = false
+                errorMessage = message
             }
         }
     }

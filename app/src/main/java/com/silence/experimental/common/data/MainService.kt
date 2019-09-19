@@ -7,7 +7,7 @@ interface MainService {
 
     companion object {
         private const val BASE = "3/movie/"
-        private const val MOVIES_POPULAR = "{$BASE}popular"
+        private const val MOVIES_POPULAR = "${BASE}popular"
     }
 
     @GET(MOVIES_POPULAR)

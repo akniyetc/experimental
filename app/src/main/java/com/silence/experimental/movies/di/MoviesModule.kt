@@ -15,22 +15,23 @@ import javax.inject.Singleton
 @Module
 class MoviesModule {
 
-    @Singleton
+    /*@MoviesScope
     @Provides
     fun provideMoviesCache(db: ExperimentalDataBase) = MoviesCache(db)
 
-    @Singleton
+    @MoviesScope
     @Provides
-    fun provideMoviesRemote(service: MainService,
-                            networkHandler: NetworkHandler,
-                            moviesCache: MoviesCache)
-            = MoviesRemote(service,networkHandler, moviesCache)
-
-    @Singleton
-    @Provides
-    fun provideMoviesRepository(repository: MoviesRepositoryImpl) = repository
+    fun provideMoviesRemote(
+        service: MainService,
+        networkHandler: NetworkHandler,
+        moviesCache: MoviesCache
+    ) = MoviesRemote(service, networkHandler, moviesCache)*/
 
     @MoviesScope
     @Provides
-    fun provideMoviesUseCase(moviesRepository: MoviesRepository) = GetMovies(moviesRepository)
+    fun provideMoviesRepository(repository: MoviesRepositoryImpl) = repository
+
+    /*@MoviesScope
+    @Provides
+    fun provideMoviesUseCase(moviesRepository: MoviesRepository) = GetMovies(moviesRepository)*/
 }

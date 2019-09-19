@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/movie_item_margin"
-    android:background="@color/colorPrimary"
-    app:cardCornerRadius="@dimen/card_view_corner_radius"
-    android:padding="@dimen/card_view_corner_radius">
+    android:padding="@dimen/card_view_corner_radius"
+    app:cardCornerRadius="@dimen/card_view_corner_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/imgMoviePoster"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="180dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvMovieTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgMoviePoster"
-            tools:text="Titanic"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/movie_item_title_size"
-            android:textColor="@android:color/white"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgMoviePoster"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Titanic" />
 
         <TextView
             android:id="@+id/tvMovieOverview"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvMovieOverview"
-            app:layout_constraintStart_toEndOf="@id/imgMoviePoster"
+            android:layout_marginStart="@dimen/text_view_overview_margin"
+            android:layout_marginLeft="@dimen/text_view_overview_margin"
             android:layout_marginTop="@dimen/text_view_overview_margin"
-            tools:text="Titanic"
-            android:textSize="@dimen/movie_item_title_size"
-            android:textColor="@android:color/white"/>
+            android:maxLines="3"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgMoviePoster"
+            app:layout_constraintTop_toBottomOf="@id/tvMovieTitle"
+            tools:text="Titanic" />
 
         <RatingBar
             android:id="@+id/ratingBarMovies"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvMovieOverview"
-            app:layout_constraintStart_toEndOf="@id/imgMoviePoster"/>
+            android:numStars="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgMoviePoster"
+            app:layout_constraintTop_toBottomOf="@id/tvMovieOverview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

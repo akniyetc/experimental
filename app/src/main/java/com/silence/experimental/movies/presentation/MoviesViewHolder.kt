@@ -11,10 +11,10 @@ class MoviesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     fun bind(movie: MoviePresentationModel,
              clickListener: (MoviePresentationModel) -> Unit) {
 
-        itemView.imgMoviePoster.loadFromUrl(PosterUrls.BASE_URL + movie.posterPath)
+        itemView.imgMoviePoster.loadFromUrl("https://m.media-amazon.com/images/M/MV5BMTA0MjI5ODA3MjReQTJeQWpwZ15BbWU3MDI1NTE3Njc@._V1_SX300.jpg")
         itemView.tvMovieTitle.text = movie.title
         itemView.tvMovieOverview.text = movie.overview
-        itemView.ratingBarMovies.numStars = movie.voteAverage.toInt()
+        //itemView.ratingBarMovies.numStars = movie.voteAverage.toInt()
         itemView.setOnClickListener { clickListener.invoke(movie) }
     }
 }

@@ -1,6 +1,7 @@
 package com.silence.experimental.movies.presentation
 
 import android.os.Bundle
+import android.view.View
 import com.silence.experimental.R
 import com.silence.experimental.common.extension.observe
 import com.silence.experimental.common.extension.viewModel
@@ -26,11 +27,17 @@ class MoviesFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         injectMembers()
-        initViews()
 
         moviesViewModel = viewModel(viewModelFactory) {
             observe(viewState, ::handleViewState)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initViews()
+        moviesViewModel.loadPopularMovies()
     }
 
     private fun initViews() {
@@ -38,7 +45,7 @@ class MoviesFragment : BaseFragment() {
     }
 
     private fun injectMembers() {
-        moviesComponent = appComponent.plusMoviesComponent(MoviesModule())
+        moviesComponent = appComponent.plusMoviesComponent()
             .also { it.inject(this) }
     }
 
