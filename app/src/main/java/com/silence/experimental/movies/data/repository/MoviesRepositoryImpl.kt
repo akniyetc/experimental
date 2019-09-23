@@ -16,7 +16,7 @@ class MoviesRepositoryImpl @Inject constructor(
 ) : MoviesRepository {
 
     override suspend fun popularMovies(): Either<Failure, List<MovieRemoteModel>> {
-        return if (cache.isCached()) {
+        return if (cache.isCached() && !cache.isExpired()) {
             cache.getCachedMovies().map { moviesDBModels ->
                 moviesDBModels.map { it.toRepositoryModel() }
             }

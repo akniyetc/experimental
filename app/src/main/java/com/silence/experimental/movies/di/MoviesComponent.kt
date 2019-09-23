@@ -4,7 +4,7 @@ import com.silence.experimental.movies.presentation.MoviesFragment
 import dagger.Subcomponent
 
 @MoviesScope
-@Subcomponent/*(modules = [MoviesModule::class])*/
+@Subcomponent
 interface MoviesComponent {
     fun inject(fragment: MoviesFragment)
 }

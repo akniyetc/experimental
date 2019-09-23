@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-abstract class BaseUseCase<out Type, in Params> where Type : Any {
+abstract class UseCase<out Type, in Params> where Type : Any {
 
     abstract suspend fun run(params: Params): Either<Failure, Type>
 

@@ -21,4 +21,6 @@
     <string name="empty_data_description">You have not data yet.\nPlease try again later.</string>
     <string name="cache_error">Can not save data!</string>
     <string name="use_case_error">UseCase scheduler failed!</string>
+    <string name="frag_movies_movie_rating">Rating:</string>
+    <string name="frag_movies_popular_toolbar_title">Popular</string>
 </resources>

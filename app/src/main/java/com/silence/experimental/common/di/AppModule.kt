@@ -8,6 +8,7 @@ import androidx.room.RoomDatabase
 import com.silence.experimental.ExperimentalApplication
 import com.silence.experimental.common.data.ExperimentalDataBase
 import com.silence.experimental.common.data.NetworkHandler
+import com.silence.experimental.common.data.PreferenceHelper
 import com.silence.experimental.movies.data.repository.MoviesRepositoryImpl
 import com.silence.experimental.movies.domain.repository.MoviesRepository
 import dagger.Module
@@ -41,5 +42,5 @@ class AppModule(private val app: ExperimentalApplication) {
 
     @Singleton
     @Provides
-    fun provideMoviesRepository(repository: MoviesRepositoryImpl): MoviesRepository = repository
+    fun providePreferenceHelper(context: Context) = PreferenceHelper(context)
 }

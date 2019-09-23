@@ -42,6 +42,7 @@ class MoviesRemote @Inject constructor (
             cache.insertMovies(
                 remoteMovies.map { it.toDBModel() }
             )
+            cache.setLastCacheTime(System.currentTimeMillis())
         }
     }
 }

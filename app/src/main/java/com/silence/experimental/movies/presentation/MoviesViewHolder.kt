@@ -7,14 +7,15 @@ import com.silence.experimental.movies.presentation.entity.MoviePresentationMode
 import com.silence.experimental.movies.presentation.entity.PosterUrls
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MoviesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-    fun bind(movie: MoviePresentationModel,
-             clickListener: (MoviePresentationModel) -> Unit) {
-
-        itemView.imgMoviePoster.loadFromUrl("https://m.media-amazon.com/images/M/MV5BMTA0MjI5ODA3MjReQTJeQWpwZ15BbWU3MDI1NTE3Njc@._V1_SX300.jpg")
+class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun bind(
+        movie: MoviePresentationModel,
+        clickListener: (MoviePresentationModel) -> Unit
+    ) {
+        itemView.imgMoviePoster.loadFromUrl(PosterUrls.BASE_URL + movie.posterPath)
         itemView.tvMovieTitle.text = movie.title
         itemView.tvMovieOverview.text = movie.overview
-        //itemView.ratingBarMovies.numStars = movie.voteAverage.toInt()
+        itemView.ratingBarMovies.rating = movie.voteAverage.toFloat()
         itemView.setOnClickListener { clickListener.invoke(movie) }
     }
 }

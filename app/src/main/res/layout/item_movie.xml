@@ -46,14 +46,30 @@
             app:layout_constraintTop_toBottomOf="@id/tvMovieTitle"
             tools:text="Titanic" />
 
+        <TextView
+            android:id="@+id/tvMovieRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_view_overview_margin"
+            android:layout_marginLeft="@dimen/text_view_overview_margin"
+            android:layout_marginTop="@dimen/text_view_overview_margin"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toEndOf="@id/imgMoviePoster"
+            app:layout_constraintTop_toBottomOf="@id/tvMovieOverview"
+            android:text="@string/frag_movies_movie_rating" />
+
         <RatingBar
+            style="?android:attr/ratingBarStyleSmall"
             android:id="@+id/ratingBarMovies"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:isIndicator="true"
             android:numStars="10"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgMoviePoster"
-            app:layout_constraintTop_toBottomOf="@id/tvMovieOverview" />
+            app:layout_constraintStart_toEndOf="@id/tvMovieRating"
+            app:layout_constraintTop_toTopOf="@id/tvMovieRating"
+            app:layout_constraintBottom_toBottomOf="@id/tvMovieRating"
+            android:layout_marginStart="@dimen/movie_item_margin"
+            android:layout_marginLeft="@dimen/movie_item_margin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

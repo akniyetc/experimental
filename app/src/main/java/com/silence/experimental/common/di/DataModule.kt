@@ -1,8 +1,9 @@
-package com.silence.experimental.movies.di
+package com.silence.experimental.common.di
 
 import com.silence.experimental.common.data.ExperimentalDataBase
 import com.silence.experimental.common.data.MainService
 import com.silence.experimental.common.data.NetworkHandler
+import com.silence.experimental.common.data.PreferenceHelper
 import com.silence.experimental.movies.data.cache.MoviesCache
 import com.silence.experimental.movies.data.remote.MoviesRemote
 import com.silence.experimental.movies.data.repository.MoviesRepositoryImpl
@@ -13,25 +14,26 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class MoviesModule {
+class DataModule {
 
-    /*@MoviesScope
+    @Singleton
     @Provides
-    fun provideMoviesCache(db: ExperimentalDataBase) = MoviesCache(db)
+    fun provideMoviesCache(db: ExperimentalDataBase,
+                           preferenceHelper: PreferenceHelper) = MoviesCache(db, preferenceHelper)
 
-    @MoviesScope
+    @Singleton
     @Provides
     fun provideMoviesRemote(
         service: MainService,
         networkHandler: NetworkHandler,
         moviesCache: MoviesCache
-    ) = MoviesRemote(service, networkHandler, moviesCache)*/
+    ) = MoviesRemote(service, networkHandler, moviesCache)
 
-    @MoviesScope
+    @Singleton
     @Provides
-    fun provideMoviesRepository(repository: MoviesRepositoryImpl) = repository
+    fun provideMoviesRepository(repository: MoviesRepositoryImpl): MoviesRepository = repository
 
-    /*@MoviesScope
+    @Singleton
     @Provides
-    fun provideMoviesUseCase(moviesRepository: MoviesRepository) = GetMovies(moviesRepository)*/
+    fun provideMoviesUseCase(moviesRepository: MoviesRepository) = GetMovies(moviesRepository)
 }

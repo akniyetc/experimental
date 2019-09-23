@@ -10,12 +10,13 @@ import javax.inject.Singleton
     modules = [
         AppModule::class,
         NetworkModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+        DataModule::class
     ]
 )
 @Singleton
 interface AppComponent {
     fun inject(app: ExperimentalApplication)
 
-    fun plusMoviesComponent(/*module: MoviesModule*/): MoviesComponent
+    fun plusMoviesComponent(): MoviesComponent
 }

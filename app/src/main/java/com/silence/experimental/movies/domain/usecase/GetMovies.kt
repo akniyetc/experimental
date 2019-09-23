@@ -1,6 +1,6 @@
 package com.silence.experimental.movies.domain.usecase
 
-import com.silence.experimental.common.domain.BaseUseCase
+import com.silence.experimental.common.domain.UseCase
 import com.silence.experimental.common.domain.entity.Either
 import com.silence.experimental.common.domain.entity.Either.*
 import com.silence.experimental.common.domain.entity.Failure
@@ -13,7 +13,7 @@ import com.silence.experimental.movies.domain.usecase.GetMovies.*
 import javax.inject.Inject
 
 class GetMovies @Inject constructor(private val moviesRepository: MoviesRepository) :
-    BaseUseCase<List<MovieDomainModel>, Params>() {
+    UseCase<List<MovieDomainModel>, Params>() {
 
     override suspend fun run(params: Params): Either<Failure, List<MovieDomainModel>> {
         return try {

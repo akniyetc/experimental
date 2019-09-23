@@ -9,7 +9,6 @@ import com.silence.experimental.common.extension.visible
 import com.silence.experimental.common.presentation.BaseFragment
 import com.silence.experimental.common.presentation.ViewState
 import com.silence.experimental.movies.di.MoviesComponent
-import com.silence.experimental.movies.di.MoviesModule
 import com.silence.experimental.movies.presentation.entity.MoviePresentationModel
 import kotlinx.android.synthetic.main.fragment_movies.*
 import javax.inject.Inject
@@ -42,6 +41,7 @@ class MoviesFragment : BaseFragment() {
 
     private fun initViews() {
         rvMovies.adapter = moviesAdapter
+        swipeRefreshMovies.setOnRefreshListener { moviesViewModel.loadPopularMovies() }
     }
 
     private fun injectMembers() {
@@ -51,12 +51,8 @@ class MoviesFragment : BaseFragment() {
 
     private fun handleViewState(viewState: ViewState<List<MoviePresentationModel>>?) {
         viewState?.let { state ->
-            if (state.data != null) {
-                rvMovies.visible(true)
-                moviesAdapter.collection = state.data!!
-            } else {
-                rvMovies.visible(false)
-            }
+            state.data?.let { moviesAdapter.collection = it }
+            rvMovies.visible(state.data != null)
             swipeRefreshMovies.isRefreshing = state.isLoading
             state.errorMessage?.let { showMessage(it, contentMovies) }
         }
@@ -66,9 +62,5 @@ class MoviesFragment : BaseFragment() {
         super.onDestroyView()
 
         moviesComponent = null
-    }
-
-    companion object {
-        fun newInstance() = MoviesFragment()
     }
 }
