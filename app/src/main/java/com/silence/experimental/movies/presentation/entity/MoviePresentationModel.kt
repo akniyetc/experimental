@@ -11,5 +11,8 @@ data class MoviePresentationModel(
     val voteAverage: Double = 0.0,
     val id: Long = 0,
     val adult: Boolean = false,
-    val voteCount: Int = 0
+    val voteCount: Int = 0,
+    val tagLine: String = "",
+    val budget: Long = 0L,
+    val status: String = ""
 )

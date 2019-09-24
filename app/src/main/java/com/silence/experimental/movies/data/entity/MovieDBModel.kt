@@ -18,7 +18,10 @@ data class MovieDBModel(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val adult: Boolean = false,
-    val voteCount: Int = 0
+    val voteCount: Int = 0,
+    val tagLine: String = "",
+    val budget: Long = 0L,
+    val status: String = ""
 )
 
 fun MovieDBModel.toRepositoryModel(): MovieRemoteModel =
@@ -34,7 +37,10 @@ fun MovieDBModel.toRepositoryModel(): MovieRemoteModel =
             it.voteAverage,
             it.id,
             it.adult,
-            it.voteCount
+            it.voteCount,
+            it.tagLine,
+            it.budget,
+            it.status
         )
     }
 

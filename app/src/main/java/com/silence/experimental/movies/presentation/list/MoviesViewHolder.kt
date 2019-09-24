@@ -1,4 +1,4 @@
-package com.silence.experimental.movies.presentation
+package com.silence.experimental.movies.presentation.list
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -12,10 +12,12 @@ class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         movie: MoviePresentationModel,
         clickListener: (MoviePresentationModel) -> Unit
     ) {
-        itemView.imgMoviePoster.loadFromUrl(PosterUrls.BASE_URL + movie.posterPath)
+        itemView.imgMoviePoster.loadFromUrl(PosterUrls.URL_185 + movie.posterPath)
         itemView.tvMovieTitle.text = movie.title
         itemView.tvMovieOverview.text = movie.overview
         itemView.ratingBarMovies.rating = movie.voteAverage.toFloat()
-        itemView.setOnClickListener { clickListener.invoke(movie) }
+        itemView.setOnClickListener {
+            clickListener.invoke(movie)
+        }
     }
 }

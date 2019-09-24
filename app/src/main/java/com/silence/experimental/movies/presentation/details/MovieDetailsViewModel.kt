@@ -1,4 +1,4 @@
-package com.silence.experimental.movies.presentation
+package com.silence.experimental.movies.presentation.details
 
 import androidx.lifecycle.MutableLiveData
 import com.silence.experimental.common.domain.entity.Failure
@@ -7,36 +7,31 @@ import com.silence.experimental.common.presentation.ErrorHandler
 import com.silence.experimental.common.presentation.ViewState
 import com.silence.experimental.movies.domain.entity.MovieDomainModel
 import com.silence.experimental.movies.domain.entity.toPresentationModel
-import com.silence.experimental.movies.domain.usecase.GetMovies
-import com.silence.experimental.movies.domain.usecase.GetMovies.*
+import com.silence.experimental.movies.domain.usecase.GetMovieDetails
+import com.silence.experimental.movies.domain.usecase.GetMovieDetails.*
 import com.silence.experimental.movies.presentation.entity.MoviePresentationModel
 import javax.inject.Inject
 
-class MoviesViewModel @Inject constructor(
-    private val getMovies: GetMovies,
+class MovieDetailsViewModel @Inject constructor(
+    private val getMovieDetails: GetMovieDetails,
     private val errorHandler: ErrorHandler
 ) : BaseViewModel() {
 
-    private val viewStateData = ViewState<List<MoviePresentationModel>>(
+    private val viewStateData = ViewState<MoviePresentationModel>(
         isLoading = true
     )
 
-    val viewState = MutableLiveData<ViewState<List<MoviePresentationModel>>>().apply {
+    val viewState = MutableLiveData<ViewState<MoviePresentationModel>>().apply {
         value = viewStateData
     }
 
-    fun loadPopularMovies() {
-        viewState.value?.let {
-            it.data = null
-            it.isLoading = true
-            it.errorMessage = null
-        }
-        getMovies(this, Params()) { it.either(::handleFailure, ::handlePopularMovies) }
+    fun loadMovieDetails(id: Long) {
+        getMovieDetails(this, Params(id)) { it.either(::handleFailure, ::handleMovieDetails) }
     }
 
-    private fun handlePopularMovies(movies: List<MovieDomainModel>) {
+    private fun handleMovieDetails(movie: MovieDomainModel) {
         viewState.value = viewStateData.apply {
-            data = movies.map { it.toPresentationModel() }
+            data = movie.toPresentationModel()
             isLoading = false
             errorMessage = null
         }

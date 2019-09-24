@@ -7,18 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/contentMovies">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarMovies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/frag_movies_popular_toolbar_title"
-            app:titleTextColor="@android:color/white"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include layout="@layout/toolbar"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshMovies"

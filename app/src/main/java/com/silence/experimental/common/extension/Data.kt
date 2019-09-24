@@ -3,14 +3,12 @@ package com.silence.experimental.common.extension
 import android.content.res.Resources
 import com.silence.experimental.R
 import com.silence.experimental.common.domain.entity.Failure
-import com.silence.experimental.common.domain.entity.Failure.*
-import com.silence.experimental.movies.data.cache.MoviesCache
-import com.silence.experimental.movies.data.cache.MoviesCache.*
-import com.silence.experimental.movies.domain.usecase.GetMovies
-import com.silence.experimental.movies.domain.usecase.GetMovies.*
-import com.silence.experimental.movies.presentation.entity.MoviePresentationModel
+import com.silence.experimental.common.domain.entity.Failure.NetworkConnection
+import com.silence.experimental.common.domain.entity.Failure.ServerError
+import com.silence.experimental.movies.data.cache.MoviesCache.MoviesCacheFailure
+import com.silence.experimental.movies.domain.usecase.GetMovieDetails.MovieDetailsUseCaseException
+import com.silence.experimental.movies.domain.usecase.GetMovies.MoviesFailure
 import retrofit2.HttpException
-import java.net.SocketTimeoutException
 
 fun Failure.errorMessage(resources: Resources) = when (this) {
     is HttpException -> when (this.code()) {
@@ -29,5 +27,8 @@ fun Failure.errorMessage(resources: Resources) = when (this) {
     is ServerError -> resources.getString(R.string.server_error_error)
     is MoviesCacheFailure -> resources.getString(R.string.cache_error)
     is MoviesFailure -> resources.getString(R.string.use_case_error)
+    is MovieDetailsUseCaseException -> resources.getString(R.string.use_case_error)
     else -> resources.getString(R.string.unknown_error)
 }
+
+fun Long.withDollar() = "$$this"

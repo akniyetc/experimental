@@ -6,4 +6,5 @@ import com.silence.experimental.movies.data.entity.MovieRemoteModel
 
 interface MoviesRepository {
     suspend fun popularMovies(): Either<Failure, List<MovieRemoteModel>>
+    suspend fun movieDetails(id: Long): Either<Failure, MovieRemoteModel>
 }

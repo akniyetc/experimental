@@ -23,4 +23,14 @@
     <string name="use_case_error">UseCase scheduler failed!</string>
     <string name="frag_movies_movie_rating">Rating:</string>
     <string name="frag_movies_popular_toolbar_title">Popular</string>
+    <string name="frag_movie_details_poster_content_description">Movie Poster</string>
+    <string name="frag_movie_details_tagline">TagLine:</string>
+    <string name="frag_movie_details_overview">Overview:</string>
+    <string name="frag_movie_details_rating">Rating:</string>
+    <string name="movie_item_transition_name">moviePoster</string>
+    <string name="movie_details_transition_name">DetailsPoster</string>
+    <string name="frag_movie_details_release_date">Release date:</string>
+    <string name="frag_movie_details_budget">Budget:</string>
+    <string name="frag_movie_details_status">Status:</string>
+    <string name="frag_movie_details_adult">18+</string>
 </resources>

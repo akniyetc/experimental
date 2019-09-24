@@ -29,6 +29,14 @@ class MoviesRemote @Inject constructor (
         }
     }
 
+    suspend fun loadMovieDetails(id: Long): Either<Failure, MovieRemoteModel> {
+        return if (networkHandler.hasNetworkConnection()) {
+            request(mainService.loadMovieDetails(id))
+        } else {
+            Left(NetworkConnection)
+        }
+    }
+
     private fun <T> request(data: T?): Either<Failure, T> {
         return try {
             if (data == null) Left(ServerError) else Right(data)

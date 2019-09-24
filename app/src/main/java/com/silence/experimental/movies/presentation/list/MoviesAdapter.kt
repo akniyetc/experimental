@@ -1,4 +1,4 @@
-package com.silence.experimental.movies.presentation
+package com.silence.experimental.movies.presentation.list
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

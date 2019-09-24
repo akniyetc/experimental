@@ -24,4 +24,8 @@ class MoviesRepositoryImpl @Inject constructor(
             remote.loadPopularMovies()
         }
     }
+
+    override suspend fun movieDetails(id: Long): Either<Failure, MovieRemoteModel> {
+        return remote.loadMovieDetails(id)
+    }
 }

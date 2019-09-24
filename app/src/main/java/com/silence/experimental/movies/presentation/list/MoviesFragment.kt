@@ -1,7 +1,8 @@
-package com.silence.experimental.movies.presentation
+package com.silence.experimental.movies.presentation.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.silence.experimental.R
 import com.silence.experimental.common.extension.observe
 import com.silence.experimental.common.extension.viewModel
@@ -9,8 +10,10 @@ import com.silence.experimental.common.extension.visible
 import com.silence.experimental.common.presentation.BaseFragment
 import com.silence.experimental.common.presentation.ViewState
 import com.silence.experimental.movies.di.MoviesComponent
+import com.silence.experimental.movies.presentation.details.MovieDetailsFragment
 import com.silence.experimental.movies.presentation.entity.MoviePresentationModel
 import kotlinx.android.synthetic.main.fragment_movies.*
+import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 class MoviesFragment : BaseFragment() {
@@ -40,8 +43,16 @@ class MoviesFragment : BaseFragment() {
     }
 
     private fun initViews() {
+        toolbar.title = context?.getString(R.string.frag_movies_popular_toolbar_title)
+
         rvMovies.adapter = moviesAdapter
         swipeRefreshMovies.setOnRefreshListener { moviesViewModel.loadPopularMovies() }
+
+        moviesAdapter.clickListener = { movie ->
+            findNavController().navigate(
+                R.id.fromMoviesToMovieDetails,
+                Bundle().apply { putLong(MovieDetailsFragment.MOVIE_ID, movie.id) })
+        }
     }
 
     private fun injectMembers() {

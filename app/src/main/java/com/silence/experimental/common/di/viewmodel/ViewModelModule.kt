@@ -2,8 +2,8 @@ package com.silence.experimental.common.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.silence.experimental.movies.di.MoviesScope
-import com.silence.experimental.movies.presentation.MoviesViewModel
+import com.silence.experimental.movies.presentation.details.MovieDetailsViewModel
+import com.silence.experimental.movies.presentation.list.MoviesViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -17,4 +17,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MoviesViewModel::class)
     abstract fun bindsMoviesViewModel(moviesViewModel: MoviesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MovieDetailsViewModel::class)
+    abstract fun bindsMovieDetailsViewModel(movieDetailsViewModel: MovieDetailsViewModel): ViewModel
 }

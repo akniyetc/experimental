@@ -8,6 +8,7 @@ import com.silence.experimental.movies.data.cache.MoviesCache
 import com.silence.experimental.movies.data.remote.MoviesRemote
 import com.silence.experimental.movies.data.repository.MoviesRepositoryImpl
 import com.silence.experimental.movies.domain.repository.MoviesRepository
+import com.silence.experimental.movies.domain.usecase.GetMovieDetails
 import com.silence.experimental.movies.domain.usecase.GetMovies
 import dagger.Module
 import dagger.Provides
@@ -36,4 +37,8 @@ class DataModule {
     @Singleton
     @Provides
     fun provideMoviesUseCase(moviesRepository: MoviesRepository) = GetMovies(moviesRepository)
+
+    @Singleton
+    @Provides
+    fun provideMovieDetailsUseCase(moviesRepository: MoviesRepository) = GetMovieDetails(moviesRepository)
 }

@@ -13,7 +13,10 @@ data class MovieDomainModel(
     val voteAverage: Double = 0.0,
     val id: Long = 0,
     val adult: Boolean = false,
-    val voteCount: Int = 0
+    val voteCount: Int = 0,
+    val tagLine: String = "",
+    val budget: Long = 0L,
+    val status: String = ""
 )
 
 fun MovieDomainModel.toPresentationModel(): MoviePresentationModel =
@@ -29,7 +32,10 @@ fun MovieDomainModel.toPresentationModel(): MoviePresentationModel =
             it.voteAverage,
             it.id,
             it.adult,
-            it.voteCount
+            it.voteCount,
+            it.tagLine,
+            it.budget,
+            it.status
         )
     }
 
