@@ -4,18 +4,15 @@ import android.content.Context
 import android.content.res.Resources
 import android.net.ConnectivityManager
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.silence.experimental.ExperimentalApplication
 import com.silence.experimental.common.data.ExperimentalDataBase
 import com.silence.experimental.common.data.NetworkHandler
 import com.silence.experimental.common.data.PreferenceHelper
-import com.silence.experimental.movies.data.repository.MoviesRepositoryImpl
-import com.silence.experimental.movies.domain.repository.MoviesRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [NetworkModule::class, DataModule::class])
 class AppModule(private val app: ExperimentalApplication) {
 
     companion object {
@@ -29,7 +26,8 @@ class AppModule(private val app: ExperimentalApplication) {
     @Singleton
     @Provides
     fun provideDataBase(context: Context): ExperimentalDataBase {
-        return Room.databaseBuilder(context, ExperimentalDataBase::class.java, DATA_BASE_NAME).build()
+        return Room.databaseBuilder(context, ExperimentalDataBase::class.java, DATA_BASE_NAME)
+            .build()
     }
 
     @Singleton

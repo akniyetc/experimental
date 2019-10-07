@@ -5,7 +5,9 @@ import com.silence.experimental.common.data.MainService
 import com.silence.experimental.common.data.NetworkHandler
 import com.silence.experimental.common.data.PreferenceHelper
 import com.silence.experimental.movies.data.cache.MoviesCache
+import com.silence.experimental.movies.data.cache.MoviesCacheImpl
 import com.silence.experimental.movies.data.remote.MoviesRemote
+import com.silence.experimental.movies.data.remote.MoviesRemoteImpl
 import com.silence.experimental.movies.data.repository.MoviesRepositoryImpl
 import com.silence.experimental.movies.domain.repository.MoviesRepository
 import com.silence.experimental.movies.domain.usecase.GetMovieDetails
@@ -19,8 +21,10 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideMoviesCache(db: ExperimentalDataBase,
-                           preferenceHelper: PreferenceHelper) = MoviesCache(db, preferenceHelper)
+    fun provideMoviesCache(
+        db: ExperimentalDataBase,
+        preferenceHelper: PreferenceHelper
+    ): MoviesCache = MoviesCacheImpl(db, preferenceHelper)
 
     @Singleton
     @Provides
@@ -28,7 +32,7 @@ class DataModule {
         service: MainService,
         networkHandler: NetworkHandler,
         moviesCache: MoviesCache
-    ) = MoviesRemote(service, networkHandler, moviesCache)
+    ): MoviesRemote = MoviesRemoteImpl(service, networkHandler, moviesCache)
 
     @Singleton
     @Provides
@@ -40,5 +44,6 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideMovieDetailsUseCase(moviesRepository: MoviesRepository) = GetMovieDetails(moviesRepository)
+    fun provideMovieDetailsUseCase(moviesRepository: MoviesRepository) =
+        GetMovieDetails(moviesRepository)
 }

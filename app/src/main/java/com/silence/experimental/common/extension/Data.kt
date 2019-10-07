@@ -5,9 +5,7 @@ import com.silence.experimental.R
 import com.silence.experimental.common.domain.entity.Failure
 import com.silence.experimental.common.domain.entity.Failure.NetworkConnection
 import com.silence.experimental.common.domain.entity.Failure.ServerError
-import com.silence.experimental.movies.data.cache.MoviesCache.MoviesCacheFailure
-import com.silence.experimental.movies.domain.usecase.GetMovieDetails.MovieDetailsUseCaseException
-import com.silence.experimental.movies.domain.usecase.GetMovies.MoviesFailure
+import com.silence.experimental.movies.data.cache.MoviesCacheImpl.MoviesCacheFailure
 import retrofit2.HttpException
 
 fun Failure.errorMessage(resources: Resources) = when (this) {
@@ -26,8 +24,6 @@ fun Failure.errorMessage(resources: Resources) = when (this) {
     is NetworkConnection -> resources.getString(R.string.network_error)
     is ServerError -> resources.getString(R.string.server_error_error)
     is MoviesCacheFailure -> resources.getString(R.string.cache_error)
-    is MoviesFailure -> resources.getString(R.string.use_case_error)
-    is MovieDetailsUseCaseException -> resources.getString(R.string.use_case_error)
     else -> resources.getString(R.string.unknown_error)
 }
 

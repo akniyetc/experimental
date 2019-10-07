@@ -1,11 +1,7 @@
 package com.silence.experimental
 
 import android.app.Application
-import com.silence.experimental.common.di.AppComponent
-import com.silence.experimental.common.di.AppModule
-import com.silence.experimental.common.di.DaggerAppComponent
-import com.silence.experimental.common.di.NetworkModule
-import com.silence.experimental.common.di.DataModule
+import com.silence.experimental.common.di.*
 
 class ExperimentalApplication : Application() {
 
@@ -13,8 +9,6 @@ class ExperimentalApplication : Application() {
         DaggerAppComponent
             .builder()
             .appModule(AppModule(this))
-            .networkModule(NetworkModule())
-            .dataModule(DataModule())
             .build()
     }
 

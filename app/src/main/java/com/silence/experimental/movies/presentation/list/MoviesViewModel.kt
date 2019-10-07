@@ -1,41 +1,37 @@
 package com.silence.experimental.movies.presentation.list
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.silence.experimental.common.domain.entity.Failure
-import com.silence.experimental.common.presentation.BaseViewModel
 import com.silence.experimental.common.presentation.ErrorHandler
 import com.silence.experimental.common.presentation.ViewState
 import com.silence.experimental.movies.domain.entity.MovieDomainModel
 import com.silence.experimental.movies.domain.entity.toPresentationModel
 import com.silence.experimental.movies.domain.usecase.GetMovies
-import com.silence.experimental.movies.domain.usecase.GetMovies.*
 import com.silence.experimental.movies.presentation.entity.MoviePresentationModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+typealias MoviesViewState = ViewState<List<MoviePresentationModel>>
 
 class MoviesViewModel @Inject constructor(
     private val getMovies: GetMovies,
     private val errorHandler: ErrorHandler
-) : BaseViewModel() {
+) : ViewModel() {
 
-    private val viewStateData = ViewState<List<MoviePresentationModel>>(
-        isLoading = true
-    )
-
-    val viewState = MutableLiveData<ViewState<List<MoviePresentationModel>>>().apply {
-        value = viewStateData
+    val viewState = MutableLiveData<MoviesViewState>().apply {
+        value = MoviesViewState().apply { isLoading = true }
     }
 
     fun loadPopularMovies() {
-        viewState.value?.let {
-            it.data = null
-            it.isLoading = true
-            it.errorMessage = null
+        viewModelScope.launch {
+            getMovies().either(::handleFailure, ::handlePopularMovies)
         }
-        getMovies(this, Params()) { it.either(::handleFailure, ::handlePopularMovies) }
     }
 
     private fun handlePopularMovies(movies: List<MovieDomainModel>) {
-        viewState.value = viewStateData.apply {
+        viewState.value = MoviesViewState().apply {
             data = movies.map { it.toPresentationModel() }
             isLoading = false
             errorMessage = null
@@ -43,12 +39,10 @@ class MoviesViewModel @Inject constructor(
     }
 
     private fun handleFailure(exception: Failure) {
-        errorHandler.proceed(exception) { message ->
-            viewState.value = viewStateData.apply {
-                data = null
-                isLoading = false
-                errorMessage = message
-            }
+        viewState.value = MoviesViewState().apply {
+            data = null
+            isLoading = false
+            errorMessage = errorHandler.proceed(exception)
         }
     }
 }

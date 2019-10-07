@@ -41,7 +41,7 @@ data class MoviesRemoteData(
     @SerializedName("total_pages")
     val totalPages: Int = 0,
     @SerializedName("results")
-    val results: List<MovieRemoteModel>? = null,
+    val results: List<MovieRemoteModel> = emptyList(),
     @SerializedName("total_results")
     val totalResults: Int = 0
 )

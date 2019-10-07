@@ -1,32 +1,15 @@
 package com.silence.experimental.movies.domain.usecase
 
-import com.silence.experimental.common.domain.UseCase
-import com.silence.experimental.common.domain.entity.Either
-import com.silence.experimental.common.domain.entity.Either.*
-import com.silence.experimental.common.domain.entity.Failure
-import com.silence.experimental.common.domain.entity.Failure.FeatureFailure
 import com.silence.experimental.common.domain.entity.map
 import com.silence.experimental.movies.data.entity.toDomainModel
-import com.silence.experimental.movies.domain.entity.MovieDomainModel
 import com.silence.experimental.movies.domain.repository.MoviesRepository
-import com.silence.experimental.movies.domain.usecase.GetMovies.*
 import javax.inject.Inject
 
-class GetMovies @Inject constructor(private val moviesRepository: MoviesRepository) :
-    UseCase<List<MovieDomainModel>, Params>() {
+class GetMovies @Inject constructor(private val moviesRepository: MoviesRepository){
 
-    override suspend fun run(params: Params): Either<Failure, List<MovieDomainModel>> {
-        return try {
-            moviesRepository.popularMovies().map { repositoryModels ->
-                repositoryModels.map {
-                    it.toDomainModel()
-                }
-            }
-        } catch (exp: Throwable) {
-            Left(MoviesFailure(exp))
+    suspend operator fun invoke() = moviesRepository.popularMovies().map { repositoryModels ->
+        repositoryModels.map {
+            it.toDomainModel()
         }
     }
-
-    class Params
-    data class MoviesFailure(val t: Throwable) : FeatureFailure()
 }
